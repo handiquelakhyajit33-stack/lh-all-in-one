@@ -3,212 +3,67 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LH All-in-One Tools</title>
 
-<title>LH All-in-One</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
+*{box-sizing:border-box}
 body{
-  font-family:Arial, sans-serif;
-  background:#08111f;
-  color:white;
-  line-height:1.6;
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#07111f;
+  color:#fff;
 }
-
-/* Navbar */
 nav{
-  position:sticky;
-  top:0;
-  z-index:100;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 7%;
-  background:#0b1628;
-  border-bottom:1px solid #1d3557;
+  position:sticky;top:0;z-index:10;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:15px 6%;background:#0b1728;border-bottom:1px solid #203a5a;
 }
-
-.logo{
-  font-size:22px;
-  font-weight:bold;
-  color:#4da3ff;
-}
-
-.nav-links{
-  display:flex;
-  gap:18px;
-}
-
-.nav-links a{
-  color:white;
-  text-decoration:none;
-  font-size:14px;
-}
-
-/* Hero */
+.logo{font-size:22px;font-weight:bold;color:#55aaff}
+nav a{color:white;text-decoration:none;margin-left:12px;font-size:14px}
 .hero{
-  text-align:center;
-  padding:90px 20px 70px;
-  background:linear-gradient(135deg,#08111f,#102a43,#111827);
+  text-align:center;padding:65px 15px;
+  background:linear-gradient(135deg,#07111f,#12375d);
 }
-
-.hero h1{
-  font-size:42px;
-  margin-bottom:15px;
-}
-
-.hero h1 span{
-  color:#4da3ff;
-}
-
-.hero p{
-  max-width:650px;
-  margin:auto;
-  color:#b7c4d6;
-  font-size:17px;
-}
-
-.hero-buttons{
-  margin-top:30px;
-}
-
-.btn{
-  display:inline-block;
-  padding:13px 22px;
-  margin:5px;
-  border-radius:10px;
-  text-decoration:none;
-  font-weight:bold;
-}
-
-.primary{
-  background:#4da3ff;
-  color:#06101e;
-}
-
-.secondary{
-  border:1px solid #4da3ff;
-  color:#4da3ff;
-}
-
-/* Tools */
-.tools{
-  padding:70px 7%;
-}
-
-.section-title{
-  text-align:center;
-  margin-bottom:40px;
-}
-
-.section-title h2{
-  font-size:30px;
-}
-
-.section-title p{
-  color:#aab7c4;
-}
-
+.hero h1{font-size:38px;margin:0}
+.hero p{color:#b8c8da}
+section{padding:45px 6%}
+h2{text-align:center}
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:20px;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:18px;
 }
-
 .card{
-  background:#101c2e;
-  border:1px solid #1f3655;
-  padding:25px;
-  border-radius:16px;
-  transition:.3s;
+  background:#101e31;border:1px solid #25486c;
+  border-radius:16px;padding:20px;
 }
-
-.card:hover{
-  transform:translateY(-7px);
-  border-color:#4da3ff;
+.card h3{margin:10px 0}
+.card p{color:#afbdd0;font-size:14px}
+button,.download{
+  width:100%;padding:11px;margin-top:10px;
+  border:0;border-radius:8px;background:#55aaff;
+  color:#07111f;font-weight:bold;cursor:pointer;
 }
-
-.icon{
-  font-size:42px;
+input,textarea,select{
+  width:100%;padding:11px;margin:7px 0;
+  border-radius:7px;border:1px solid #355779;
+  background:#091626;color:white;
 }
-
-.card h3{
-  margin:15px 0 10px;
+.tool{
+  display:none;margin-top:15px;padding-top:10px;
+  border-top:1px solid #27415f;
 }
-
-.card p{
-  color:#aab7c4;
-  font-size:14px;
+img.preview{
+  width:100%;max-height:250px;object-fit:contain;
+  margin-top:10px;display:none;
 }
-
-.card button{
-  width:100%;
-  margin-top:18px;
-  padding:11px;
-  border:none;
-  border-radius:8px;
-  background:#4da3ff;
-  color:#07111f;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-/* About */
-.about{
-  padding:70px 10%;
-  text-align:center;
-  background:#0c1727;
-}
-
-.about p{
-  max-width:700px;
-  margin:20px auto;
-  color:#b7c4d6;
-}
-
-/* Footer */
-footer{
-  text-align:center;
-  padding:25px;
-  background:#050b14;
-  color:#8291a5;
-}
-
-/* Mobile */
-@media(max-width:600px){
-  nav{
-    padding:14px 5%;
-  }
-
-  .nav-links{
-    gap:10px;
-  }
-
-  .nav-links a{
-    font-size:11px;
-  }
-
-  .hero{
-    padding:70px 15px 50px;
-  }
-
-  .hero h1{
-    font-size:32px;
-  }
-
-  .tools{
-    padding:50px 5%;
-  }
-}
+canvas{max-width:100%;margin-top:10px}
+#qr{background:white;padding:10px;margin-top:10px;display:inline-block}
+footer{text-align:center;padding:25px;background:#030810;color:#8395aa}
+.small{font-size:12px;color:#9fb0c5}
 </style>
 </head>
 
@@ -216,117 +71,362 @@ footer{
 
 <nav>
   <div class="logo">⚡ LH All-in-One</div>
-
-  <div class="nav-links">
-    <a href="#home">Home</a>
-    <a href="#tools">AI Tools</a>
-    <a href="#about">About</a>
+  <div>
+    <a href="#image">Image</a>
+    <a href="#pdf">PDF</a>
+    <a href="#document">Document</a>
   </div>
 </nav>
 
-<section class="hero" id="home">
-  <h1>Welcome to <span>LH All-in-One</span></h1>
+<div class="hero">
+  <h1>LH All-in-One Tools</h1>
+  <p>Image, PDF, Document, Bio-Data, Resume and more — in one website.</p>
+</div>
 
-  <p>
-    One platform for AI tools, image generation, video creation,
-    music, writing and more.
-  </p>
+<section id="image">
+<h2>🖼️ Image Tools</h2>
+<div class="grid">
 
-  <div class="hero-buttons">
-    <a href="#tools" class="btn primary">Explore AI Tools</a>
-    <a href="#about" class="btn secondary">About Us</a>
-  </div>
+<div class="card">
+<h3>📄 Image to PDF</h3>
+<p>Convert one image to PDF.</p>
+<button onclick="toggle('imagePdf')">Open Tool</button>
+<div class="tool" id="imagePdf">
+<input type="file" id="pdfImg" accept="image/*">
+<button onclick="makeImagePDF()">Convert & Download PDF</button>
+</div>
+</div>
+
+<div class="card">
+<h3>📐 Image Resizer</h3>
+<p>Resize image width and height.</p>
+<button onclick="toggle('resizer')">Open Tool</button>
+<div class="tool" id="resizer">
+<input type="file" id="resizeFile" accept="image/*">
+<input type="number" id="resizeW" placeholder="Width e.g. 800">
+<input type="number" id="resizeH" placeholder="Height e.g. 600">
+<button onclick="resizeImage()">Resize & Download</button>
+</div>
+</div>
+
+<div class="card">
+<h3>🗜️ Image Compressor</h3>
+<p>Reduce JPEG image size.</p>
+<button onclick="toggle('compressor')">Open Tool</button>
+<div class="tool" id="compressor">
+<input type="file" id="compressFile" accept="image/*">
+<input type="number" id="quality" min="10" max="100" value="70" placeholder="Quality">
+<button onclick="compressImage()">Compress & Download</button>
+</div>
+</div>
+
+<div class="card">
+<h3>✂️ Image Cropper</h3>
+<p>Simple square crop from selected image.</p>
+<button onclick="toggle('cropper')">Open Tool</button>
+<div class="tool" id="cropper">
+<input type="file" id="cropFile" accept="image/*">
+<button onclick="cropImage()">Square Crop & Download</button>
+</div>
+</div>
+
+<div class="card">
+<h3>🔄 Image Converter</h3>
+<p>Convert image to JPG or PNG.</p>
+<button onclick="toggle('converter')">Open Tool</button>
+<div class="tool" id="converter">
+<input type="file" id="convertFile" accept="image/*">
+<select id="format">
+<option value="image/jpeg">JPG</option>
+<option value="image/png">PNG</option>
+</select>
+<button onclick="convertImage()">Convert & Download</button>
+</div>
+</div>
+
+</div>
 </section>
 
-<section class="tools" id="tools">
+<section id="pdf">
+<h2>📄 PDF Tools</h2>
+<div class="grid">
 
-  <div class="section-title">
-    <h2>🚀 AI Tools</h2>
-    <p>Explore powerful tools in one place</p>
-  </div>
+<div class="card">
+<h3>📝 Text to PDF</h3>
+<button onclick="toggle('textPdf')">Open Tool</button>
+<div class="tool" id="textPdf">
+<textarea id="pdfText" rows="8" placeholder="Write or paste your text here..."></textarea>
+<button onclick="textToPDF()">Create PDF</button>
+</div>
+</div>
 
-  <div class="grid">
+<div class="card">
+<h3>📚 PDF Tools</h3>
+<p>PDF Merge, Split, Word conversion and advanced PDF editing can be connected next using a backend/API.</p>
+<button onclick="alert('Advanced PDF tools require additional service/API.')">Advanced Tools</button>
+</div>
 
-    <div class="card">
-      <div class="icon">🎨</div>
-      <h3>AI Image Generator</h3>
-      <p>Create amazing images from your text prompt.</p>
-      <button onclick="showMessage('AI Image Generator will be added soon!')">
-        Generate Image
-      </button>
-    </div>
+<div class="card">
+<h3>📄 Word to PDF</h3>
+<p>Upload/conversion backend can be added in the next version.</p>
+<button onclick="alert('Word to PDF needs a conversion service or backend.')">Open</button>
+</div>
 
-    <div class="card">
-      <div class="icon">🎥</div>
-      <h3>Image to Video</h3>
-      <p>Transform your images into creative AI videos.</p>
-      <button onclick="showMessage('Image to Video tool will be added soon!')">
-        Create Video
-      </button>
-    </div>
-
-    <div class="card">
-      <div class="icon">🎵</div>
-      <h3>AI Music Generator</h3>
-      <p>Create songs and music with artificial intelligence.</p>
-      <button onclick="showMessage('AI Music Generator will be added soon!')">
-        Create Music
-      </button>
-    </div>
-
-    <div class="card">
-      <div class="icon">✍️</div>
-      <h3>AI Writer</h3>
-      <p>Generate stories, captions, blogs and creative content.</p>
-      <button onclick="showMessage('AI Writer will be added soon!')">
-        Start Writing
-      </button>
-    </div>
-
-    <div class="card">
-      <div class="icon">🖼️</div>
-      <h3>Image Editor</h3>
-      <p>Edit, enhance and transform your images easily.</p>
-      <button onclick="showMessage('Image Editor will be added soon!')">
-        Edit Image
-      </button>
-    </div>
-
-    <div class="card">
-      <div class="icon">💬</div>
-      <h3>AI Assistant</h3>
-      <p>Ask questions and get intelligent assistance.</p>
-      <button onclick="showMessage('AI Assistant will be added soon!')">
-        Ask AI
-      </button>
-    </div>
-
-  </div>
+</div>
 </section>
 
-<section class="about" id="about">
-  <h2>About LH All-in-One</h2>
+<section id="document">
+<h2>📷 Document & Personal Tools</h2>
+<div class="grid">
 
-  <p>
-    LH All-in-One is a modern platform designed to bring useful AI tools
-    together in one simple and easy-to-use website.
-  </p>
+<div class="card">
+<h3>📷 Document Scanner</h3>
+<p>Take a photo of your document or upload it.</p>
+<button onclick="toggle('scanner')">Open Scanner</button>
+<div class="tool" id="scanner">
+<input type="file" accept="image/*" capture="environment" id="scanFile">
+<img id="scanPreview" class="preview">
+<button onclick="previewScan()">Preview Scan</button>
+<button onclick="scanToPDF()">Save Scan as PDF</button>
+</div>
+</div>
 
-  <p>
-    🎨 Create Images • 🎥 Make Videos • 🎵 Generate Music • ✍️ Write Content
-  </p>
+<div class="card">
+<h3>👤 Bio-Data Maker</h3>
+<p>Create your personal Bio-Data and download PDF.</p>
+<button onclick="toggle('biodata')">Create Bio-Data</button>
+<div class="tool" id="biodata">
+<input id="bioName" placeholder="Full Name">
+<input id="bioFather" placeholder="Father's Name">
+<input id="bioMother" placeholder="Mother's Name">
+<input id="bioDOB" placeholder="Date of Birth">
+<input id="bioAddress" placeholder="Address">
+<input id="bioPhone" placeholder="Phone Number">
+<input id="bioEmail" placeholder="Email">
+<textarea id="bioAbout" placeholder="About yourself"></textarea>
+<button onclick="bioPDF()">Create Bio-Data PDF</button>
+</div>
+</div>
+
+<div class="card">
+<h3>💼 Resume / CV Maker</h3>
+<p>Create a simple professional CV PDF.</p>
+<button onclick="toggle('resume')">Create CV</button>
+<div class="tool" id="resume">
+<input id="cvName" placeholder="Full Name">
+<input id="cvPhone" placeholder="Phone">
+<input id="cvEmail" placeholder="Email">
+<textarea id="cvEdu" placeholder="Education"></textarea>
+<textarea id="cvExp" placeholder="Work Experience"></textarea>
+<textarea id="cvSkills" placeholder="Skills"></textarea>
+<button onclick="resumePDF()">Create CV PDF</button>
+</div>
+</div>
+
+<div class="card">
+<h3>🔳 QR Code Generator</h3>
+<p>Create QR code from text or website link.</p>
+<button onclick="toggle('qrTool')">Open Tool</button>
+<div class="tool" id="qrTool">
+<input id="qrText" placeholder="Enter text or website link">
+<button onclick="makeQR()">Generate QR Code</button>
+<div id="qr"></div>
+</div>
+</div>
+
+</div>
+</section>
+
+<section>
+<h2>🤖 Advanced AI Tools</h2>
+<div class="grid">
+<div class="card"><h3>🎨 AI Image Generator</h3><p>Can be connected to an AI API.</p></div>
+<div class="card"><h3>🎥 Image to Video</h3><p>Requires video generation API.</p></div>
+<div class="card"><h3>🎵 AI Music</h3><p>Requires AI music service/API.</p></div>
+<div class="card"><h3>🔍 OCR Text Scanner</h3><p>Advanced text extraction can be added.</p></div>
+<div class="card"><h3>🪄 Background Remover</h3><p>Can be connected to an image processing API.</p></div>
+</div>
 </section>
 
 <footer>
-  <p>© 2026 LH All-in-One. All Rights Reserved.</p>
-  <p>Built with ❤️ using GitHub Pages</p>
+© 2026 LH All-in-One • Free Online Tools
 </footer>
 
 <script>
-function showMessage(message){
-  alert(message);
+function toggle(id){
+  const x=document.getElementById(id);
+  x.style.display=x.style.display==="block"?"none":"block";
+}
+
+function loadImage(file,callback){
+  if(!file)return alert("Please select an image first!");
+  const r=new FileReader();
+  r.onload=e=>{
+    const img=new Image();
+    img.onload=()=>callback(img,e.target.result);
+    img.src=e.target.result;
+  };
+  r.readAsDataURL(file);
+}
+
+function downloadCanvas(canvas,name,type="image/jpeg",quality=.9){
+  const a=document.createElement("a");
+  a.href=canvas.toDataURL(type,quality);
+  a.download=name;
+  a.click();
+}
+
+function makeImagePDF(){
+  const file=document.getElementById("pdfImg").files[0];
+  loadImage(file,(img,data)=>{
+    const {jsPDF}=window.jspdf;
+    const pdf=new jsPDF(img.width>img.height?"l":"p","mm","a4");
+    const pw=pdf.internal.pageSize.getWidth();
+    const ph=pdf.internal.pageSize.getHeight();
+    const ratio=Math.min(pw/img.width,ph/img.height);
+    const w=img.width*ratio,h=img.height*ratio;
+    pdf.addImage(data,"JPEG",(pw-w)/2,(ph-h)/2,w,h);
+    pdf.save("LH-Image-to-PDF.pdf");
+  });
+}
+
+function resizeImage(){
+  const file=document.getElementById("resizeFile").files[0];
+  const w=+document.getElementById("resizeW").value;
+  const h=+document.getElementById("resizeH").value;
+  if(!w||!h)return alert("Enter width and height.");
+  loadImage(file,img=>{
+    const c=document.createElement("canvas");
+    c.width=w;c.height=h;
+    c.getContext("2d").drawImage(img,0,0,w,h);
+    downloadCanvas(c,"resized-image.jpg");
+  });
+}
+
+function compressImage(){
+  const file=document.getElementById("compressFile").files[0];
+  const q=(+document.getElementById("quality").value||70)/100;
+  loadImage(file,img=>{
+    const c=document.createElement("canvas");
+    c.width=img.width;c.height=img.height;
+    c.getContext("2d").drawImage(img,0,0);
+    downloadCanvas(c,"compressed-image.jpg","image/jpeg",q);
+  });
+}
+
+function cropImage(){
+  const file=document.getElementById("cropFile").files[0];
+  loadImage(file,img=>{
+    const size=Math.min(img.width,img.height);
+    const sx=(img.width-size)/2,sy=(img.height-size)/2;
+    const c=document.createElement("canvas");
+    c.width=size;c.height=size;
+    c.getContext("2d").drawImage(img,sx,sy,size,size,0,0,size,size);
+    downloadCanvas(c,"cropped-image.jpg");
+  });
+}
+
+function convertImage(){
+  const file=document.getElementById("convertFile").files[0];
+  const type=document.getElementById("format").value;
+  loadImage(file,img=>{
+    const c=document.createElement("canvas");
+    c.width=img.width;c.height=img.height;
+    c.getContext("2d").drawImage(img,0,0);
+    downloadCanvas(c,type==="image/png"?"converted.png":"converted.jpg",type);
+  });
+}
+
+function textToPDF(){
+  const text=document.getElementById("pdfText").value;
+  if(!text)return alert("Write some text first.");
+  const {jsPDF}=window.jspdf;
+  const pdf=new jsPDF();
+  const lines=pdf.splitTextToSize(text,180);
+  pdf.text(lines,15,20);
+  pdf.save("LH-Text.pdf");
+}
+
+function previewScan(){
+  const file=document.getElementById("scanFile").files[0];
+  if(!file)return alert("Select or capture a document.");
+  const r=new FileReader();
+  r.onload=e=>{
+    const img=document.getElementById("scanPreview");
+    img.src=e.target.result;
+    img.style.display="block";
+  };
+  r.readAsDataURL(file);
+}
+
+function scanToPDF(){
+  const file=document.getElementById("scanFile").files[0];
+  if(!file)return alert("Select a document image.");
+  document.getElementById("pdfImg").files; 
+  loadImage(file,(img,data)=>{
+    const {jsPDF}=window.jspdf;
+    const pdf=new jsPDF("p","mm","a4");
+    const pw=210,ph=297;
+    const ratio=Math.min(pw/img.width,ph/img.height);
+    const w=img.width*ratio,h=img.height*ratio;
+    pdf.addImage(data,"JPEG",(pw-w)/2,(ph-h)/2,w,h);
+    pdf.save("scanned-document.pdf");
+  });
+}
+
+function bioPDF(){
+  const {jsPDF}=window.jspdf;
+  const pdf=new jsPDF();
+  const data=[
+    ["BIO-DATA",""],
+    ["Name",bioName.value],
+    ["Father's Name",bioFather.value],
+    ["Mother's Name",bioMother.value],
+    ["Date of Birth",bioDOB.value],
+    ["Address",bioAddress.value],
+    ["Phone",bioPhone.value],
+    ["Email",bioEmail.value],
+    ["About",bioAbout.value]
+  ];
+  let y=20;
+  data.forEach((row,i)=>{
+    if(i===0){pdf.setFontSize(20);pdf.text(row[0],15,y);y+=15;return;}
+    pdf.setFontSize(11);
+    const lines=pdf.splitTextToSize(row[0]+": "+row[1],180);
+    pdf.text(lines,15,y);y+=lines.length*8;
+  });
+  pdf.save("Bio-Data.pdf");
+}
+
+function resumePDF(){
+  const {jsPDF}=window.jspdf;
+  const pdf=new jsPDF();
+  let y=20;
+  pdf.setFontSize(20);
+  pdf.text(cvName.value||"MY RESUME",15,y);y+=15;
+  pdf.setFontSize(11);
+  [
+    "Phone: "+cvPhone.value,
+    "Email: "+cvEmail.value,
+    "EDUCATION: "+cvEdu.value,
+    "EXPERIENCE: "+cvExp.value,
+    "SKILLS: "+cvSkills.value
+  ].forEach(t=>{
+    const lines=pdf.splitTextToSize(t,180);
+    pdf.text(lines,15,y);
+    y+=lines.length*8+5;
+  });
+  pdf.save("Resume-CV.pdf");
+}
+
+function makeQR(){
+  const text=document.getElementById("qrText").value;
+  if(!text)return alert("Enter text or a link.");
+  const box=document.getElementById("qr");
+  box.innerHTML="";
+  new QRCode(box,{text:text,width:180,height:180});
 }
 </script>
 
 </body>
-  
+</html>
