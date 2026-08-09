@@ -1,288 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="description" content="LH All-in-One - Free online image, PDF, document, bio-data and resume tools.">
-<meta name="keywords" content="image to pdf, image resizer, pdf tools, bio data maker, resume maker, LH All-in-One">
-<meta name="robots" content="index, follow">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LH All-in-One Tools</title>
+
+<title>LH All-in-One | Smart Tools in One Place</title>
+<meta name="description" content="Free online image, PDF, document, bio-data, resume and smart tools.">
+<meta name="keywords" content="image to pdf, image resizer, image compressor, bio data maker, resume maker, pdf tools">
+<meta name="robots" content="index, follow">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 
 <style>
+*{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#07111f;
-  --card:rgba(18,31,49,.82);
-  --line:rgba(255,255,255,.09);
-  --text:#f4f7fb;
-  --muted:#9eacc0;
-  --blue:#54a8ff;
-  --purple:#8b5cf6;
-  --green:#35d49a;
+  --bg:#07101f;
+  --card:#101b2e;
+  --card2:#14223a;
+  --text:#eef4ff;
+  --muted:#9ba9bf;
+  --blue:#4f9cff;
+  --purple:#8a63ff;
+  --green:#20c979;
+  --pink:#ef4f91;
+  --orange:#ff8a32;
+  --border:rgba(255,255,255,.09);
 }
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
 html{scroll-behavior:smooth}
-
 body{
   font-family:Arial,sans-serif;
+  background:radial-gradient(circle at 70% 10%,#182653 0,transparent 28%),var(--bg);
   color:var(--text);
-  background:
-  radial-gradient(circle at 10% 10%,rgba(84,168,255,.14),transparent 25%),
-  radial-gradient(circle at 90% 20%,rgba(139,92,246,.14),transparent 25%),
-  var(--bg);
   min-height:100vh;
 }
-
 header{
-  position:sticky;
-  top:0;
-  z-index:100;
-  backdrop-filter:blur(18px);
-  background:rgba(7,17,31,.8);
-  border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(15px);
+  background:rgba(7,16,31,.85);
+  border-bottom:1px solid var(--border);
 }
-
-nav{
-  max-width:1200px;
-  margin:auto;
-  padding:15px 20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+.nav{
+  max-width:1300px;margin:auto;padding:16px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:15px;
 }
-
-.logo{
-  font-size:20px;
-  font-weight:800;
-  color:#fff;
-}
-
-.logo span{color:var(--blue)}
-
-.nav-links{
-  display:flex;
-  gap:16px;
-}
-
-.nav-links a{
-  color:var(--muted);
-  text-decoration:none;
-  font-size:14px;
-}
+.logo{font-size:24px;font-weight:800}
+.logo span{color:#68a9ff}
+nav{display:flex;gap:18px}
+nav a{color:#c8d3e6;text-decoration:none;font-size:14px}
+nav a:hover{color:white}
+.container{max-width:1300px;margin:auto;padding:0 20px}
 
 .hero{
-  max-width:1100px;
-  margin:auto;
-  padding:80px 20px 45px;
-  text-align:center;
+  min-height:500px;
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  align-items:center;
+  gap:40px;
 }
-
 .badge{
-  display:inline-block;
-  padding:8px 14px;
-  border:1px solid var(--line);
-  background:rgba(84,168,255,.08);
-  color:#9fcaff;
-  border-radius:30px;
-  font-size:13px;
+  display:inline-block;padding:10px 15px;border:1px solid #3476c7;
+  border-radius:30px;color:#87c1ff;background:#0d1c31;font-size:13px
 }
+h1{font-size:clamp(42px,6vw,78px);line-height:1.05;margin:20px 0}
+.gradient{
+  background:linear-gradient(90deg,#54b2ff,#a37aff,#e16cff);
+  -webkit-background-clip:text;color:transparent
+}
+.hero p{font-size:18px;color:#aebbd0;line-height:1.7;max-width:650px}
+.search{
+  margin-top:25px;display:flex;background:#101b2e;border:1px solid var(--border);
+  border-radius:15px;padding:5px
+}
+.search input{
+  width:100%;padding:16px;background:transparent;border:0;outline:0;color:white;font-size:15px
+}
+.hero-art{
+  height:390px;display:flex;justify-content:center;align-items:center;position:relative
+}
+.orbit{
+  width:260px;height:260px;border:2px solid #2f6eb5;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 80px #356eff44;
+}
+.lh{
+  width:155px;height:155px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:58px;font-weight:900;
+  background:linear-gradient(135deg,#4fc3ff,#7b5cff,#d75cff);
+  color:white;box-shadow:0 0 45px #6c6cff88
+}
+.float{
+  position:absolute;padding:17px;border-radius:18px;
+  background:#13223b;border:1px solid var(--border);font-size:30px;
+  box-shadow:0 10px 30px #0006
+}
+.f1{top:20px;left:8%}.f2{top:30px;right:5%}.f3{bottom:35px;left:12%}.f4{bottom:15px;right:10%}
 
-.hero h1{
-  font-size:clamp(36px,8vw,70px);
-  line-height:1;
-  margin:22px 0;
-  background:linear-gradient(90deg,#fff,#7fc1ff,#b58cff);
-  -webkit-background-clip:text;
-  color:transparent;
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin:10px 0 40px
 }
-
-.hero p{
-  max-width:700px;
-  margin:auto;
-  color:var(--muted);
-  font-size:17px;
-  line-height:1.7;
+.stat{
+  background:linear-gradient(135deg,#101b2e,#0d1728);
+  border:1px solid var(--border);padding:20px;border-radius:16px
 }
-
-.search-box{
-  max-width:700px;
-  margin:30px auto 0;
-  padding:7px;
-  border-radius:16px;
-  background:var(--card);
-  border:1px solid var(--line);
-}
-
-.search-box input{
-  width:100%;
-  border:0;
-  outline:none;
-  padding:16px;
-  background:transparent;
-  color:white;
-  font-size:16px;
-}
+.stat b{font-size:22px}.stat small{display:block;color:var(--muted);margin-top:6px}
 
 .categories{
-  max-width:1100px;
-  margin:20px auto 0;
-  padding:0 20px;
-  display:flex;
-  gap:10px;
-  overflow:auto;
+  display:flex;flex-wrap:wrap;gap:10px;padding:16px;
+  background:#101b2e;border:1px solid var(--border);border-radius:18px;margin:30px 0
 }
-
-.categories button{
-  white-space:nowrap;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.04);
-  color:#c9d5e4;
-  padding:10px 15px;
-  border-radius:30px;
-  cursor:pointer;
+.cat{
+  flex:1;min-width:120px;padding:14px;border:1px solid transparent;
+  background:transparent;color:#b9c5d9;border-radius:10px;cursor:pointer
 }
+.cat:hover,.cat.active{background:#172d50;border-color:#377de0;color:white}
 
-.categories button:hover,
-.categories button.active{
-  background:var(--blue);
-  color:#07111f;
+.tools{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;padding-bottom:60px
 }
-
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:50px 20px;
-}
-
-.section-title{
-  margin-bottom:24px;
-}
-
-.section-title h2{
-  font-size:28px;
-}
-
-.section-title p{
-  color:var(--muted);
-  margin-top:8px;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:18px;
-}
-
 .card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:22px;
-  padding:22px;
-  transition:.25s;
-  overflow:hidden;
+  background:linear-gradient(145deg,#121e32,#0d1728);
+  border:1px solid var(--border);border-radius:18px;padding:20px;
+  transition:.25s;display:flex;flex-direction:column
 }
-
-.card:hover{
-  transform:translateY(-5px);
-  border-color:rgba(84,168,255,.55);
+.card:hover{transform:translateY(-5px);border-color:#397bd0;box-shadow:0 15px 40px #0004}
+.icon{font-size:34px;margin-bottom:14px}
+.card h3{font-size:18px;margin-bottom:9px}
+.card p{font-size:13px;line-height:1.6;color:var(--muted);flex:1}
+.use{
+  margin-top:18px;border:0;border-radius:10px;padding:13px;
+  color:white;font-weight:bold;cursor:pointer;
+  background:linear-gradient(90deg,#2878df,#6757dc)
 }
+.use:hover{filter:brightness(1.15)}
 
-.icon{
-  width:54px;
-  height:54px;
-  display:grid;
-  place-items:center;
-  border-radius:16px;
-  background:linear-gradient(135deg,rgba(84,168,255,.2),rgba(139,92,246,.2));
-  font-size:27px;
+.modal{
+  display:none;position:fixed;inset:0;z-index:100;
+  background:rgba(0,0,0,.8);backdrop-filter:blur(8px);
+  align-items:center;justify-content:center;padding:15px
 }
-
-.card h3{
-  margin:16px 0 8px;
+.modal.show{display:flex}
+.modal-box{
+  width:min(700px,100%);max-height:90vh;overflow:auto;
+  background:#101b2e;border:1px solid var(--border);border-radius:22px;padding:25px;
+  position:relative
 }
-
-.card p{
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.6;
+.close{
+  position:absolute;right:15px;top:12px;background:#26354d;border:0;
+  color:white;width:38px;height:38px;border-radius:50%;font-size:22px;cursor:pointer
 }
-
-button.action{
-  width:100%;
-  margin-top:18px;
-  padding:13px;
-  border:0;
-  border-radius:12px;
-  cursor:pointer;
-  background:linear-gradient(90deg,var(--blue),#78c3ff);
-  color:#07111f;
-  font-weight:700;
-}
-
-.tool-box{
-  display:none;
-  margin-top:18px;
-  padding-top:16px;
-  border-top:1px solid var(--line);
-}
-
-.tool-box.show{
-  display:block;
-  animation:fade .3s ease;
-}
-
-@keyframes fade{
-  from{opacity:0;transform:translateY(-8px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
+.modal h2{margin-bottom:10px}
+.help{color:var(--muted);font-size:14px;margin-bottom:20px}
 input,textarea,select{
-  width:100%;
-  margin:7px 0;
-  padding:12px;
-  border-radius:10px;
-  border:1px solid var(--line);
-  background:#0a1728;
-  color:white;
-  outline:none;
+  width:100%;padding:13px;margin:7px 0 14px;border-radius:10px;
+  border:1px solid #2a3b58;background:#0a1424;color:white;outline:none
 }
-
-textarea{min-height:90px;resize:vertical}
-
+textarea{min-height:100px;resize:vertical}
+label{font-size:13px;color:#c9d5e8}
+.action{
+  width:100%;padding:14px;border:0;border-radius:10px;
+  background:linear-gradient(90deg,#3487ff,#785fff);color:white;font-weight:bold;cursor:pointer
+}
+.result{margin-top:18px}
 .preview{
-  width:100%;
-  max-height:250px;
-  object-fit:contain;
-  margin-top:10px;
-  border-radius:12px;
-  display:none;
+  max-width:100%;max-height:350px;border-radius:12px;margin-top:10px;border:1px solid var(--border)
 }
-
-.note{
-  color:#90a4bb;
-  font-size:12px;
-  margin-top:8px;
-}
-
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.loader{display:none;text-align:center;padding:15px;color:#7fb7ff}
 footer{
-  text-align:center;
-  color:#7f91a8;
-  padding:35px 20px;
-  border-top:1px solid var(--line);
+  border-top:1px solid var(--border);padding:30px;text-align:center;color:var(--muted)
 }
 
-@media(max-width:650px){
-  .nav-links{display:none}
-  .hero{padding-top:55px}
-  .hero p{font-size:15px}
-  .container{padding:40px 15px}
+@media(max-width:800px){
+  nav{display:none}
+  .hero{grid-template-columns:1fr;padding-top:45px}
+  .hero-art{height:300px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  h1{font-size:46px}
 }
 </style>
 </head>
@@ -290,521 +186,444 @@ footer{
 <body>
 
 <header>
-<nav>
-<div class="logo">⚡ <span>LH</span> All-in-One</div>
-<div class="nav-links">
-<a href="#tools">Tools</a>
-<a href="#documents">Documents</a>
-<a href="#creator">Creator</a>
-</div>
-</nav>
+  <div class="nav">
+    <div class="logo">⚡ <span>LH</span> All-in-One</div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#tools">Tools</a>
+      <a href="#about">About</a>
+    </nav>
+    <button class="use" style="width:auto;padding:10px 16px" onclick="window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})">⭐ Favorite</button>
+  </div>
 </header>
 
-<section class="hero">
-<div class="badge">🚀 Fast • Simple • All-in-One</div>
-<h1>Everything you need.<br>One powerful website.</h1>
-<p>Convert images, create PDFs, resize photos, scan documents, make Bio-Data and Resume, and use many more useful tools.</p>
+<main class="container" id="home">
 
-<div class="search-box">
-<input type="text" id="search" placeholder="🔍 Search tools..." oninput="searchTools()">
-</div>
+<section class="hero">
+  <div>
+    <div class="badge">🚀 100% Free • Easy • Fast • Secure</div>
+    <h1>All Your Tools.<br><span class="gradient">One Powerful Website.</span></h1>
+    <p>Convert, create, edit and manage your images, PDFs, documents, bio-data, resumes and more — all in one place.</p>
+
+    <div class="search">
+      <input id="searchInput" onkeyup="searchTools()" placeholder="Search any tool you need...">
+    </div>
+  </div>
+
+  <div class="hero-art">
+    <div class="orbit"><div class="lh">LH</div></div>
+    <div class="float f1">🖼️</div>
+    <div class="float f2">📄</div>
+    <div class="float f3">👤</div>
+    <div class="float f4">📱</div>
+  </div>
 </section>
 
+<section class="stats">
+  <div class="stat"><b>25+</b><small>Powerful Tools</small></div>
+  <div class="stat"><b>100%</b><small>Free Forever</small></div>
+  <div class="stat"><b>⚡ Fast</b><small>Lightning Speed</small></div>
+  <div class="stat"><b>🛡️ Secure</b><small>Your Data</small></div>
+</section>
+
+<section id="tools">
 <div class="categories">
-<button class="active" onclick="filterCategory('all',this)">All</button>
-<button onclick="filterCategory('image',this)">🖼️ Image</button>
-<button onclick="filterCategory('pdf',this)">📄 PDF</button>
-<button onclick="filterCategory('document',this)">📷 Document</button>
-<button onclick="filterCategory('creator',this)">👤 Creator</button>
+<button class="cat active" onclick="filterTools('all',this)">▦ All Tools</button>
+<button class="cat" onclick="filterTools('image',this)">🖼️ Image Tools</button>
+<button class="cat" onclick="filterTools('pdf',this)">📄 PDF Tools</button>
+<button class="cat" onclick="filterTools('document',this)">📑 Documents</button>
+<button class="cat" onclick="filterTools('creator',this)">👤 Creator Tools</button>
 </div>
 
-<main class="container" id="tools">
+<div class="tools">
 
-<div class="section-title">
-<h2>Popular Tools</h2>
-<p>Choose a tool and start instantly.</p>
-</div>
+<div class="card" data-category="image">
+<div class="icon">🖼️</div><h3>Image to PDF</h3><p>Convert one or multiple images into a PDF file.</p>
+<button class="use" onclick="openTool('imagePdf')">Use Now →</button></div>
 
-<div class="grid">
+<div class="card" data-category="image">
+<div class="icon">📏</div><h3>Image Resizer</h3><p>Resize your image to custom width and height.</p>
+<button class="use" onclick="openTool('resize')">Use Now →</button></div>
 
-<!-- Multiple Image PDF -->
-<div class="card tool-card" data-category="image pdf">
-<div class="icon">📄</div>
-<h3>Multiple Image to PDF</h3>
-<p>Select multiple images and combine them into one PDF.</p>
-<button class="action" onclick="openTool('imagePdf')">Open Tool</button>
+<div class="card" data-category="image">
+<div class="icon">🗜️</div><h3>Image Compressor</h3><p>Reduce image file size and download it.</p>
+<button class="use" onclick="openTool('compress')">Use Now →</button></div>
 
-<div class="tool-box" id="imagePdf">
-<input type="file" id="pdfImages" accept="image/*" multiple>
-<p class="note">Select one or multiple images.</p>
-<button class="action" onclick="makeMultiplePDF()">Create PDF</button>
-</div>
-</div>
+<div class="card" data-category="image">
+<div class="icon">🔄</div><h3>Image Converter</h3><p>Convert image to JPG, PNG or WEBP.</p>
+<button class="use" onclick="openTool('convert')">Use Now →</button></div>
 
-<!-- Image Resizer -->
-<div class="card tool-card" data-category="image">
-<div class="icon">📐</div>
-<h3>Image Resizer</h3>
-<p>Resize your image to custom width and height.</p>
-<button class="action" onclick="openTool('resizer')">Open Tool</button>
+<div class="card" data-category="document">
+<div class="icon">📝</div><h3>Text to PDF</h3><p>Write notes or text and save as PDF.</p>
+<button class="use" onclick="openTool('textPdf')">Use Now →</button></div>
 
-<div class="tool-box" id="resizer">
-<input type="file" id="resizeFile" accept="image/*">
-<input type="number" id="resizeW" placeholder="Width">
-<input type="number" id="resizeH" placeholder="Height">
-<button class="action" onclick="resizeImage()">Resize & Download</button>
-</div>
-</div>
+<div class="card" data-category="document">
+<div class="icon">📷</div><h3>Document Scanner</h3><p>Upload or capture a document and enhance it.</p>
+<button class="use" onclick="openTool('scanner')">Use Now →</button></div>
 
-<!-- Compressor -->
-<div class="card tool-card" data-category="image">
-<div class="icon">🗜️</div>
-<h3>Image Compressor</h3>
-<p>Reduce image size while keeping good quality.</p>
-<button class="action" onclick="openTool('compress')">Open Tool</button>
+<div class="card" data-category="creator">
+<div class="icon">👤</div><h3>Bio-Data Maker</h3><p>Create a professional bio-data and download PDF.</p>
+<button class="use" onclick="openTool('biodata')">Use Now →</button></div>
 
-<div class="tool-box" id="compress">
-<input type="file" id="compressFile" accept="image/*">
-<input type="number" id="quality" min="10" max="100" value="70">
-<button class="action" onclick="compressImage()">Compress Image</button>
-</div>
-</div>
+<div class="card" data-category="creator">
+<div class="icon">💼</div><h3>Resume / CV Maker</h3><p>Create a clean professional resume quickly.</p>
+<button class="use" onclick="openTool('resume')">Use Now →</button></div>
 
-<!-- Converter -->
-<div class="card tool-card" data-category="image">
-<div class="icon">🔄</div>
-<h3>Image Converter</h3>
-<p>Convert images to JPG or PNG.</p>
-<button class="action" onclick="openTool('converter')">Open Tool</button>
+<div class="card" data-category="document">
+<div class="icon">🔳</div><h3>QR Code Generator</h3><p>Create QR codes for links, text and contact info.</p>
+<button class="use" onclick="openTool('qr')">Use Now →</button></div>
 
-<div class="tool-box" id="converter">
-<input type="file" id="convertFile" accept="image/*">
-<select id="convertFormat">
-<option value="image/jpeg">JPG</option>
-<option value="image/png">PNG</option>
-</select>
-<button class="action" onclick="convertImage()">Convert</button>
-</div>
-</div>
+<div class="card" data-category="image">
+<div class="icon">🔤</div><h3>Image to Text OCR</h3><p>Extract readable text from an uploaded image.</p>
+<button class="use" onclick="openTool('ocr')">Use Now →</button></div>
 
-<!-- Text PDF -->
-<div class="card tool-card" data-category="pdf">
-<div class="icon">📝</div>
-<h3>Text to PDF</h3>
-<p>Write or paste text and download it as PDF.</p>
-<button class="action" onclick="openTool('textPdf')">Open Tool</button>
+<div class="card" data-category="pdf">
+<div class="icon">📚</div><h3>PDF Merge</h3><p>Combine multiple PDF documents into one file.</p>
+<button class="use" onclick="openTool('pdfInfo')">Use Now →</button></div>
 
-<div class="tool-box" id="textPdf">
-<textarea id="pdfText" placeholder="Write your text here..."></textarea>
-<button class="action" onclick="textToPDF()">Create PDF</button>
-</div>
-</div>
+<div class="card" data-category="pdf">
+<div class="icon">✂️</div><h3>PDF Split</h3><p>Split PDF pages into separate documents.</p>
+<button class="use" onclick="openTool('pdfInfo')">Use Now →</button></div>
 
-<!-- Scanner -->
-<div class="card tool-card" data-category="document pdf">
-<div class="icon">📷</div>
-<h3>Document Scanner</h3>
-<p>Capture or upload a document and save it as PDF.</p>
-<button class="action" onclick="openTool('scanner')">Open Scanner</button>
+<div class="card" data-category="pdf">
+<div class="icon">🔐</div><h3>PDF Lock / Unlock</h3><p>Manage PDF protection and security.</p>
+<button class="use" onclick="openTool('pdfInfo')">Use Now →</button></div>
 
-<div class="tool-box" id="scanner">
-<input type="file" id="scanFile" accept="image/*" capture="environment" onchange="previewScan()">
-<img id="scanPreview" class="preview">
-<button class="action" onclick="scanToPDF()">Save as PDF</button>
-</div>
-</div>
+<div class="card" data-category="creator">
+<div class="icon">✨</div><h3>AI Image Generator</h3><p>Generate creative images using your AI service.</p>
+<button class="use" onclick="openTool('ai')">Use Now →</button></div>
 
-<!-- Bio Data -->
-<div class="card tool-card" data-category="creator document" id="documents">
-<div class="icon">👤</div>
-<h3>Professional Bio-Data</h3>
-<p>Create a beautiful Bio-Data with personal details and photo.</p>
-<button class="action" onclick="openTool('biodata')">Create Bio-Data</button>
-
-<div class="tool-box" id="biodata">
-<input type="file" id="bioPhoto" accept="image/*">
-<input id="bioName" placeholder="Full Name">
-<input id="bioDOB" placeholder="Date of Birth">
-<select id="bioGender">
-<option value="">Select Gender</option>
-<option>Male</option>
-<option>Female</option>
-<option>Other</option>
-</select>
-<input id="bioFather" placeholder="Father's Name">
-<input id="bioMother" placeholder="Mother's Name">
-<input id="bioPhone" placeholder="Phone Number">
-<input id="bioEmail" placeholder="Email Address">
-<textarea id="bioAddress" placeholder="Full Address"></textarea>
-<textarea id="bioEducation" placeholder="Educational Qualification"></textarea>
-<textarea id="bioSkills" placeholder="Skills"></textarea>
-<textarea id="bioAbout" placeholder="About Yourself"></textarea>
-<button class="action" onclick="bioPDF()">Generate Bio-Data PDF</button>
-</div>
-</div>
-
-<!-- Resume -->
-<div class="card tool-card" data-category="creator document" id="creator">
-<div class="icon">💼</div>
-<h3>Resume / CV Maker</h3>
-<p>Create a professional Resume or CV and download PDF.</p>
-<button class="action" onclick="openTool('resume')">Create CV</button>
-
-<div class="tool-box" id="resume">
-<input id="cvName" placeholder="Full Name">
-<input id="cvPhone" placeholder="Phone Number">
-<input id="cvEmail" placeholder="Email Address">
-<textarea id="cvEducation" placeholder="Education"></textarea>
-<textarea id="cvExperience" placeholder="Work Experience"></textarea>
-<textarea id="cvSkills" placeholder="Skills"></textarea>
-<button class="action" onclick="resumePDF()">Generate Resume PDF</button>
-</div>
-</div>
-
-<!-- QR -->
-<div class="card tool-card" data-category="document">
-<div class="icon">🔳</div>
-<h3>QR Code Generator</h3>
-<p>Create a QR code from text, phone number or website.</p>
-<button class="action" onclick="openTool('qrTool')">Generate QR</button>
-
-<div class="tool-box" id="qrTool">
-<input id="qrText" placeholder="Enter text or website link">
-<button class="action" onclick="makeQR()">Generate QR</button>
-<div id="qr" style="margin-top:15px;background:white;padding:10px;display:inline-block"></div>
-</div>
-</div>
-
-<!-- Advanced -->
-<div class="card tool-card" data-category="image">
-<div class="icon">✨</div>
-<h3>HD Image Enhancer</h3>
-<p>Advanced AI enhancement can be connected in a future API version.</p>
-<button class="action" onclick="alert('HD AI enhancement requires an external AI processing service.')">Coming Soon</button>
-</div>
-
-<div class="card tool-card" data-category="pdf">
-<div class="icon">📚</div>
-<h3>PDF Merge & Split</h3>
-<p>Combine or split PDF files. Advanced browser processing can be added next.</p>
-<button class="action" onclick="alert('Advanced PDF tools will be added in the next update.')">Coming Soon</button>
-</div>
-
-<div class="card tool-card" data-category="document">
-<div class="icon">🔍</div>
-<h3>Text Scanner OCR</h3>
-<p>Extract text from image or document.</p>
-<button class="action" onclick="alert('OCR requires an OCR engine or processing service.')">Coming Soon</button>
-</div>
+<div class="card" data-category="document">
+<div class="icon">📋</div><h3>Word to PDF</h3><p>Document conversion tool section.</p>
+<button class="use" onclick="openTool('pdfInfo')">Use Now →</button></div>
 
 </div>
+</section>
 </main>
 
-<footer>
-© 2026 LH All-in-One • Smart tools in one place ⚡
+<footer id="about">
+♥ Made with ♥ for everyone<br><br>
+© 2026 LH All-in-One. All rights reserved.
 </footer>
 
+<div class="modal" id="modal">
+<div class="modal-box">
+<button class="close" onclick="closeModal()">×</button>
+<div id="modalContent"></div>
+</div>
+</div>
+
 <script>
-function openTool(id){
-  document.getElementById(id).classList.toggle("show");
+const modal=document.getElementById("modal");
+const content=document.getElementById("modalContent");
+
+function openTool(tool){
+modal.classList.add("show");
+
+const templates={
+imagePdf:`
+<h2>🖼️ Image to PDF</h2>
+<p class="help">Select one or multiple images and create a PDF.</p>
+<input type="file" id="pdfImages" accept="image/*" multiple>
+<button class="action" onclick="imageToPDF()">Create PDF</button>
+<div class="result" id="result"></div>`,
+
+resize:`
+<h2>📏 Image Resizer</h2>
+<input type="file" id="resizeImage" accept="image/*">
+<div class="row">
+<div><label>Width</label><input type="number" id="width" value="1080"></div>
+<div><label>Height</label><input type="number" id="height" value="1080"></div>
+</div>
+<button class="action" onclick="resizeImage()">Resize & Download</button>`,
+
+compress:`
+<h2>🗜️ Image Compressor</h2>
+<input type="file" id="compressImage" accept="image/*">
+<label>Quality: <span id="qualityValue">70</span>%</label>
+<input type="range" min="10" max="100" value="70" id="quality" oninput="qualityValue.innerText=this.value">
+<button class="action" onclick="compressImage()">Compress & Download</button>`,
+
+convert:`
+<h2>🔄 Image Converter</h2>
+<input type="file" id="convertImage" accept="image/*">
+<select id="format">
+<option value="image/jpeg">JPG</option>
+<option value="image/png">PNG</option>
+<option value="image/webp">WEBP</option>
+</select>
+<button class="action" onclick="convertImage()">Convert & Download</button>`,
+
+textPdf:`
+<h2>📝 Text to PDF</h2>
+<input id="pdfTitle" placeholder="Document Title">
+<textarea id="pdfText" placeholder="Write your text here..."></textarea>
+<button class="action" onclick="textToPDF()">Download PDF</button>`,
+
+scanner:`
+<h2>📷 Document Scanner</h2>
+<p class="help">Choose a document photo or take a photo with your camera.</p>
+<input type="file" accept="image/*" capture="environment" onchange="previewScanner(this)">
+<img id="scanPreview" class="preview">
+<button class="action" onclick="downloadScan()">Download Scanned Image</button>`,
+
+biodata:`
+<h2>👤 Professional Bio-Data Maker</h2>
+<input id="bioName" placeholder="Full Name">
+<div class="row">
+<input id="bioPhone" placeholder="Phone Number">
+<input id="bioEmail" placeholder="Email">
+</div>
+<input id="bioAddress" placeholder="Address">
+<div class="row">
+<input id="bioDob" placeholder="Date of Birth">
+<input id="bioGender" placeholder="Gender">
+</div>
+<textarea id="bioEducation" placeholder="Education Details"></textarea>
+<textarea id="bioExperience" placeholder="Work Experience"></textarea>
+<textarea id="bioSkills" placeholder="Skills"></textarea>
+<button class="action" onclick="createBiodata()">Create Bio-Data PDF</button>`,
+
+resume:`
+<h2>💼 Resume / CV Maker</h2>
+<input id="cvName" placeholder="Your Full Name">
+<input id="cvContact" placeholder="Phone | Email">
+<textarea id="cvProfile" placeholder="Professional Profile"></textarea>
+<textarea id="cvEducation" placeholder="Education"></textarea>
+<textarea id="cvExperience" placeholder="Experience"></textarea>
+<textarea id="cvSkills" placeholder="Skills"></textarea>
+<button class="action" onclick="createResume()">Download CV PDF</button>`,
+
+qr:`
+<h2>🔳 QR Code Generator</h2>
+<input id="qrText" placeholder="Enter website link or text">
+<button class="action" onclick="generateQR()">Generate QR Code</button>
+<div class="result" id="qrResult"></div>`,
+
+ocr:`
+<h2>🔤 Image to Text (OCR)</h2>
+<input type="file" id="ocrImage" accept="image/*">
+<button class="action" onclick="runOCR()">Extract Text</button>
+<div class="loader" id="loader">⏳ Reading image... Please wait.</div>
+<textarea id="ocrResult" placeholder="Extracted text will appear here..."></textarea>`,
+
+pdfInfo:`
+<h2>📄 PDF Tool</h2>
+<p class="help">This section is ready for the next advanced update. Full PDF merge, split and Word conversion can be added using additional browser libraries or backend services.</p>
+<input type="file" accept=".pdf,.doc,.docx">
+<button class="action" onclick="alert('File selected successfully! Advanced processing will be added in the next version.')">Select File</button>`,
+
+ai:`
+<h2>✨ AI Image Generator</h2>
+<p class="help">Describe the image you want to create.</p>
+<textarea placeholder="Example: A futuristic Assamese city at night..." id="aiPrompt"></textarea>
+<button class="action" onclick="alert('For real AI generation, connect your Google AI Studio or another AI API to this website.')">Generate with AI</button>`
+};
+
+content.innerHTML=templates[tool];
 }
 
-function searchTools(){
-  const value=document.getElementById("search").value.toLowerCase();
-  document.querySelectorAll(".tool-card").forEach(card=>{
-    card.style.display=card.innerText.toLowerCase().includes(value)?"block":"none";
-  });
+function closeModal(){modal.classList.remove("show")}
+modal.addEventListener("click",e=>{if(e.target===modal)closeModal()});
+
+function downloadCanvas(canvas,name,type="image/png"){
+const a=document.createElement("a");
+a.download=name;
+a.href=canvas.toDataURL(type);
+a.click();
 }
 
-function filterCategory(category,btn){
-  document.querySelectorAll(".categories button").forEach(b=>b.classList.remove("active"));
-  btn.classList.add("active");
-
-  document.querySelectorAll(".tool-card").forEach(card=>{
-    const cats=card.dataset.category||"";
-    card.style.display=(category==="all"||cats.includes(category))?"block":"none";
-  });
+function getImage(file,callback){
+const reader=new FileReader();
+reader.onload=e=>{
+const img=new Image();
+img.onload=()=>callback(img);
+img.src=e.target.result;
+};
+reader.readAsDataURL(file);
 }
 
-function getImage(file){
-  return new Promise((resolve,reject)=>{
-    const reader=new FileReader();
-    reader.onload=e=>{
-      const img=new Image();
-      img.onload=()=>resolve({img,data:e.target.result});
-      img.onerror=reject;
-      img.src=e.target.result;
-    };
-    reader.readAsDataURL(file);
-  });
+async function imageToPDF(){
+const files=document.getElementById("pdfImages").files;
+if(!files.length)return alert("Please select image files.");
+const {jsPDF}=window.jspdf;
+let pdf;
+for(let i=0;i<files.length;i++){
+await new Promise(resolve=>{
+getImage(files[i],img=>{
+let orientation=img.width>img.height?"l":"p";
+if(!pdf)pdf=new jsPDF({orientation,unit:"mm",format:"a4"});
+else pdf.addPage("a4",orientation);
+
+const pageW=pdf.internal.pageSize.getWidth();
+const pageH=pdf.internal.pageSize.getHeight();
+const ratio=Math.min(pageW/img.width,pageH/img.height);
+const w=img.width*ratio,h=img.height*ratio;
+pdf.addImage(img,"JPEG",(pageW-w)/2,(pageH-h)/2,w,h);
+resolve();
+});
+});
+}
+pdf.save("LH-All-in-One-Images.pdf");
 }
 
-async function makeMultiplePDF(){
-  const files=[...document.getElementById("pdfImages").files];
-
-  if(!files.length){
-    alert("Please select images first!");
-    return;
-  }
-
-  const {jsPDF}=window.jspdf;
-  const pdf=new jsPDF("p","mm","a4");
-
-  for(let i=0;i<files.length;i++){
-    const {img,data}=await getImage(files[i]);
-
-    if(i>0) pdf.addPage();
-
-    const pw=210,ph=297,m=10;
-    const ratio=Math.min((pw-m*2)/img.width,(ph-m*2)/img.height);
-    const w=img.width*ratio;
-    const h=img.height*ratio;
-
-    pdf.addImage(data,"JPEG",(pw-w)/2,(ph-h)/2,w,h);
-  }
-
-  pdf.save("LH-Images-to-PDF.pdf");
+function resizeImage(){
+const file=document.getElementById("resizeImage").files[0];
+if(!file)return alert("Select an image.");
+const w=+document.getElementById("width").value;
+const h=+document.getElementById("height").value;
+getImage(file,img=>{
+const c=document.createElement("canvas");
+c.width=w;c.height=h;c.getContext("2d").drawImage(img,0,0,w,h);
+downloadCanvas(c,"resized-image.png");
+});
 }
 
-async function resizeImage(){
-  const file=document.getElementById("resizeFile").files[0];
-  const w=Number(document.getElementById("resizeW").value);
-  const h=Number(document.getElementById("resizeH").value);
-
-  if(!file||!w||!h){
-    alert("Select image and enter width and height.");
-    return;
-  }
-
-  const {img}=await getImage(file);
-  const canvas=document.createElement("canvas");
-  canvas.width=w;
-  canvas.height=h;
-  canvas.getContext("2d").drawImage(img,0,0,w,h);
-
-  const a=document.createElement("a");
-  a.href=canvas.toDataURL("image/jpeg",.92);
-  a.download="resized-image.jpg";
-  a.click();
+function compressImage(){
+const file=document.getElementById("compressImage").files[0];
+if(!file)return alert("Select an image.");
+const q=document.getElementById("quality").value/100;
+getImage(file,img=>{
+const c=document.createElement("canvas");
+c.width=img.width;c.height=img.height;
+c.getContext("2d").drawImage(img,0,0);
+const a=document.createElement("a");
+a.download="compressed-image.jpg";
+a.href=c.toDataURL("image/jpeg",q);
+a.click();
+});
 }
 
-async function compressImage(){
-  const file=document.getElementById("compressFile").files[0];
-  const q=Number(document.getElementById("quality").value||70)/100;
-
-  if(!file){
-    alert("Select an image first.");
-    return;
-  }
-
-  const {img}=await getImage(file);
-  const canvas=document.createElement("canvas");
-  canvas.width=img.width;
-  canvas.height=img.height;
-  canvas.getContext("2d").drawImage(img,0,0);
-
-  const a=document.createElement("a");
-  a.href=canvas.toDataURL("image/jpeg",q);
-  a.download="compressed-image.jpg";
-  a.click();
-}
-
-async function convertImage(){
-  const file=document.getElementById("convertFile").files[0];
-  const type=document.getElementById("convertFormat").value;
-
-  if(!file){
-    alert("Select an image first.");
-    return;
-  }
-
-  const {img}=await getImage(file);
-  const canvas=document.createElement("canvas");
-  canvas.width=img.width;
-  canvas.height=img.height;
-  canvas.getContext("2d").drawImage(img,0,0);
-
-  const a=document.createElement("a");
-  a.href=canvas.toDataURL(type);
-  a.download=type==="image/png"?"converted.png":"converted.jpg";
-  a.click();
+function convertImage(){
+const file=document.getElementById("convertImage").files[0];
+if(!file)return alert("Select an image.");
+const type=document.getElementById("format").value;
+getImage(file,img=>{
+const c=document.createElement("canvas");
+c.width=img.width;c.height=img.height;
+c.getContext("2d").drawImage(img,0,0);
+const ext=type.split("/")[1];
+const a=document.createElement("a");
+a.download="converted-image."+ext;
+a.href=c.toDataURL(type,.92);
+a.click();
+});
 }
 
 function textToPDF(){
-  const text=document.getElementById("pdfText").value;
-
-  if(!text.trim()){
-    alert("Please enter some text.");
-    return;
-  }
-
-  const {jsPDF}=window.jspdf;
-  const pdf=new jsPDF();
-  const lines=pdf.splitTextToSize(text,180);
-  pdf.text(lines,15,20);
-  pdf.save("LH-Text.pdf");
+const title=document.getElementById("pdfTitle").value||"My Document";
+const text=document.getElementById("pdfText").value;
+const {jsPDF}=window.jspdf;
+const pdf=new jsPDF();
+pdf.setFontSize(20);
+pdf.text(title,20,20);
+pdf.setFontSize(12);
+const lines=pdf.splitTextToSize(text,170);
+pdf.text(lines,20,35);
+pdf.save(title.replace(/\s+/g,"-")+".pdf");
 }
 
-function previewScan(){
-  const file=document.getElementById("scanFile").files[0];
-  if(!file)return;
-
-  const reader=new FileReader();
-  reader.onload=e=>{
-    const p=document.getElementById("scanPreview");
-    p.src=e.target.result;
-    p.style.display="block";
-  };
-  reader.readAsDataURL(file);
+let scannedImage="";
+function previewScanner(input){
+const file=input.files[0];
+if(!file)return;
+const reader=new FileReader();
+reader.onload=e=>{
+scannedImage=e.target.result;
+document.getElementById("scanPreview").src=scannedImage;
+};
+reader.readAsDataURL(file);
+}
+function downloadScan(){
+if(!scannedImage)return alert("Please select a document image first.");
+const a=document.createElement("a");
+a.href=scannedImage;a.download="scanned-document.png";a.click();
 }
 
-async function scanToPDF(){
-  const file=document.getElementById("scanFile").files[0];
-
-  if(!file){
-    alert("Capture or select a document first.");
-    return;
-  }
-
-  const {img,data}=await getImage(file);
-  const {jsPDF}=window.jspdf;
-  const pdf=new jsPDF("p","mm","a4");
-
-  const ratio=Math.min(190/img.width,277/img.height);
-  const w=img.width*ratio;
-  const h=img.height*ratio;
-
-  pdf.addImage(data,"JPEG",(210-w)/2,(297-h)/2,w,h);
-  pdf.save("scanned-document.pdf");
+function createBiodata(){
+const {jsPDF}=window.jspdf;
+const pdf=new jsPDF();
+const name=document.getElementById("bioName").value||"YOUR NAME";
+pdf.setFontSize(24);pdf.text("BIO-DATA",105,20,{align:"center"});
+pdf.setFontSize(18);pdf.text(name,20,38);
+let y=55;
+const fields=[
+["Phone",bioPhone.value],["Email",bioEmail.value],["Address",bioAddress.value],
+["Date of Birth",bioDob.value],["Gender",bioGender.value],
+["Education",bioEducation.value],["Experience",bioExperience.value],["Skills",bioSkills.value]
+];
+pdf.setFontSize(12);
+fields.forEach(([label,value])=>{
+pdf.setFont(undefined,"bold");pdf.text(label+":",20,y);
+pdf.setFont(undefined,"normal");
+const lines=pdf.splitTextToSize(value||"-",145);
+pdf.text(lines,50,y);
+y+=Math.max(10,lines.length*7)+4;
+if(y>270){pdf.addPage();y=20;}
+});
+pdf.save("Bio-Data-"+name.replace(/\s+/g,"-")+".pdf");
 }
 
-async function bioPDF(){
-  const name=document.getElementById("bioName").value.trim();
-
-  if(!name){
-    alert("Please enter your full name.");
-    return;
-  }
-
-  const {jsPDF}=window.jspdf;
-  const pdf=new jsPDF("p","mm","a4");
-  let y=20;
-
-  pdf.setFillColor(24,73,125);
-  pdf.rect(0,0,210,34,"F");
-  pdf.setTextColor(255,255,255);
-  pdf.setFontSize(21);
-  pdf.text("PROFESSIONAL BIO-DATA",105,21,{align:"center"});
-  pdf.setTextColor(0,0,0);
-
-  const photo=document.getElementById("bioPhoto").files[0];
-  if(photo){
-    const {data}=await getImage(photo);
-    pdf.addImage(data,"JPEG",160,42,30,38);
-  }
-
-  y=48;
-
-  function section(title){
-    pdf.setFillColor(228,238,249);
-    pdf.rect(15,y-5,180,8,"F");
-    pdf.setTextColor(24,73,125);
-    pdf.setFontSize(12);
-    pdf.text(title,18,y);
-    pdf.setTextColor(0,0,0);
-    y+=11;
-  }
-
-  function field(label,value){
-    if(!value)return;
-    pdf.setFontSize(10);
-    const lines=pdf.splitTextToSize(label+": "+value,125);
-    pdf.text(lines,20,y);
-    y+=lines.length*6+3;
-  }
-
-  section("PERSONAL INFORMATION");
-  field("Full Name",name);
-  field("Date of Birth",bioDOB.value);
-  field("Gender",bioGender.value);
-  field("Father's Name",bioFather.value);
-  field("Mother's Name",bioMother.value);
-
-  y+=3;
-  section("CONTACT INFORMATION");
-  field("Phone",bioPhone.value);
-  field("Email",bioEmail.value);
-  field("Address",bioAddress.value);
-
-  y+=3;
-  section("EDUCATION & SKILLS");
-  field("Education",bioEducation.value);
-  field("Skills",bioSkills.value);
-
-  y+=3;
-  section("ABOUT ME");
-  field("About",bioAbout.value);
-
-  pdf.setFontSize(10);
-  pdf.text("Signature: ____________________",120,280);
-
-  pdf.save(name.replace(/\s+/g,"-")+"-Bio-Data.pdf");
+function createResume(){
+const {jsPDF}=window.jspdf;
+const pdf=new jsPDF();
+const name=cvName.value||"YOUR NAME";
+pdf.setFontSize(24);pdf.text(name,20,25);
+pdf.setFontSize(11);pdf.text(cvContact.value,20,34);
+let y=52;
+const fields=[
+["PROFILE",cvProfile.value],
+["EDUCATION",cvEducation.value],
+["EXPERIENCE",cvExperience.value],
+["SKILLS",cvSkills.value]
+];
+fields.forEach(([title,value])=>{
+pdf.setFontSize(15);pdf.setFont(undefined,"bold");pdf.text(title,20,y);y+=8;
+pdf.setFontSize(11);pdf.setFont(undefined,"normal");
+const lines=pdf.splitTextToSize(value||"-",170);
+pdf.text(lines,20,y);
+y+=lines.length*6+12;
+if(y>270){pdf.addPage();y=20;}
+});
+pdf.save("Resume-"+name.replace(/\s+/g,"-")+".pdf");
 }
 
-function resumePDF(){
-  const name=cvName.value.trim();
-
-  if(!name){
-    alert("Enter your full name.");
-    return;
-  }
-
-  const {jsPDF}=window.jspdf;
-  const pdf=new jsPDF();
-  let y=20;
-
-  pdf.setFontSize(22);
-  pdf.text(name,15,y);
-  y+=10;
-
-  pdf.setFontSize(10);
-  pdf.text(cvPhone.value+" | "+cvEmail.value,15,y);
-  y+=15;
-
-  function block(title,text){
-    if(!text)return;
-    pdf.setFontSize(13);
-    pdf.text(title,15,y);
-    y+=7;
-    pdf.setFontSize(10);
-    const lines=pdf.splitTextToSize(text,180);
-    pdf.text(lines,15,y);
-    y+=lines.length*6+8;
-  }
-
-  block("EDUCATION",cvEducation.value);
-  block("WORK EXPERIENCE",cvExperience.value);
-  block("SKILLS",cvSkills.value);
-
-  pdf.save(name.replace(/\s+/g,"-")+"-Resume.pdf");
+function generateQR(){
+const text=document.getElementById("qrText").value;
+if(!text)return alert("Enter text or a link.");
+const box=document.getElementById("qrResult");
+box.innerHTML="";
+new QRCode(box,{text,width:220,height:220});
 }
 
-function makeQR(){
-  const text=document.getElementById("qrText").value.trim();
-  if(!text){
-    alert("Enter text or website link.");
-    return;
-  }
+async function runOCR(){
+const file=document.getElementById("ocrImage").files[0];
+if(!file)return alert("Select an image.");
+const loader=document.getElementById("loader");
+loader.style.display="block";
+try{
+const result=await Tesseract.recognize(file,"eng");
+document.getElementById("ocrResult").value=result.data.text;
+}catch(e){
+alert("OCR failed. Please try another clear image.");
+}
+loader.style.display="none";
+}
 
-  const box=document.getElementById("qr");
-  box.innerHTML="";
-  new QRCode(box,{
-    text:text,
-    width:180,
-    height:180
-  });
+function filterTools(category,button){
+document.querySelectorAll(".cat").forEach(x=>x.classList.remove("active"));
+button.classList.add("active");
+document.querySelectorAll(".card").forEach(card=>{
+card.style.display=(category==="all"||card.dataset.category===category)?"flex":"none";
+});
+}
+
+function searchTools(){
+const q=document.getElementById("searchInput").value.toLowerCase();
+document.querySelectorAll(".card").forEach(card=>{
+card.style.display=card.innerText.toLowerCase().includes(q)?"flex":"none";
+});
 }
 </script>
-
 </body>
 </html>
