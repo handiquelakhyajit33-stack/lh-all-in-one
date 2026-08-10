@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://handiquelakhyajit33-stack.github.io/lh-all-in-one/sitemap.xml

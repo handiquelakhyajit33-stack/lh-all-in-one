@@ -1,0 +1,1 @@
+Upload all files in this package to the root of your lh-all-in-one GitHub repository. Do not delete your existing Google Search Console verification HTML file. Then submit sitemap.xml in Google Search Console and request indexing for important pages.
